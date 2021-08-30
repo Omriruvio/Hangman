@@ -56,6 +56,8 @@ function replacestar (letter) {
     }
     else {
         infomessage.update("Letter did not exist!");
+        currentattempts++;
+        userattempts.update();
     }
 
     wordstars = splitword.join("");
@@ -68,7 +70,6 @@ function isValid(input) {
 
     if (input.toLowerCase() !== input.toUpperCase()) {
         if (input.length === 1) {
-
             return true;
         }
         else {
@@ -79,12 +80,14 @@ function isValid(input) {
                 return false;
             }
             multiletterattempt ++;
+            usermulti.update();
+            infomessage.update("Word guess was incorrect!")
             console.log("You have " + (maxmultiattempts - multiletterattempt) + " multi letter attempts remaining..." )
             ismultiattempt = true;
             return true;
         }
     }
-    else {
+    else if (input !== "") {
         infomessage.update("Must use alphabetical letters only.")
     }
 }
@@ -98,8 +101,10 @@ function isValid(input) {
 
     var userclick = document.getElementById("inputbutton");
     userclick.addEventListener('click', function() {
+        ismultiattempt = false;
         if (isValid(userinput.value)) {
-            replacestar(userinput.value.toLowerCase());
+            if (!ismultiattempt) {
+            replacestar(userinput.value.toLowerCase()); }
         }
         userinput.value = "";
         userinput.focus();
@@ -108,6 +113,16 @@ function isValid(input) {
     var infomessage = document.getElementById("infomessage");
     infomessage.update = function (infostring) {
         infomessage.innerHTML = infostring;
+    }
+
+    var userattempts = document.getElementById("attemptsremain");
+    userattempts.update = function () {
+        userattempts.innerHTML = ((maxattempts - currentattempts) + " attempts remain.");
+    }
+
+    var usermulti = document.getElementById("multiremain");
+    usermulti.update = function () {
+        usermulti.innerHTML = ((maxmultiattempts - multiletterattempt) + " multi-guess attempts remain.");
     }
 
     userinput.focus();
