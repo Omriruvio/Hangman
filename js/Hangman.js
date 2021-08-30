@@ -1,7 +1,7 @@
 
 $(window).on('load', function () {
 
-var words = random_words({exactly: 1, minLength: 8, maxlength: 8});
+var words = random_words({exactly: 1, maxlength: 8});
 selectedword = words[0].toLowerCase();
 
 console.log(selectedword);
@@ -26,12 +26,12 @@ infomessage.update = function (infostring) {
 
 var userattempts = document.getElementById("attemptsremain");
 userattempts.update = function () {
-    userattempts.innerHTML = ((maxattempts - currentattempts) + " attempts remain.");
+    userattempts.innerHTML = ((maxattempts - currentattempts) + " letter attempts remain.");
 }
 
 var usermulti = document.getElementById("multiremain");
 usermulti.update = function () {
-    usermulti.innerHTML = ((maxmultiattempts - multiletterattempt) + " multi-guess attempts remain.");
+    usermulti.innerHTML = ((maxmultiattempts - multiletterattempt) + " word attempts remain.");
 }
 
 var stardisplay = document.getElementById("starredtext");
