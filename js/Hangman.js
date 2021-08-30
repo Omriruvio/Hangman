@@ -2,7 +2,6 @@
 $(window).on('load', function () {
 
 var words = random_words({exactly: 1, minLength: 8, maxlength: 8});
-// var word = (Math.floor(Math.random() * words.length));
 selectedword = words[0].toLowerCase();
 
 console.log(selectedword);
@@ -20,9 +19,80 @@ for (let i = 0; i < words[0].length; i++) {
     wordstars = wordstars + "*";
     } //create encrypted word
 
+var infomessage = document.getElementById("infomessage");
+infomessage.update = function (infostring) {
+    infomessage.innerHTML = infostring;
+}
+
+var userattempts = document.getElementById("attemptsremain");
+userattempts.update = function () {
+    userattempts.innerHTML = ((maxattempts - currentattempts) + " attempts remain.");
+}
+
+var usermulti = document.getElementById("multiremain");
+usermulti.update = function () {
+    usermulti.innerHTML = ((maxmultiattempts - multiletterattempt) + " multi-guess attempts remain.");
+}
+
+var stardisplay = document.getElementById("starredtext");
+stardisplay.update = function () {
+    stardisplay.innerHTML = wordstars;
+}
+
+var userreset = document.getElementById("resetbutton");
+userreset.addEventListener('click', function() {
+    words = random_words({exactly: 1, minLength: 8, maxlength: 8});
+    selectedword = words[0].toLowerCase();
+    console.log(selectedword);
+    wordstars = "";
+    for (let i = 0; i < words[0].length; i++) { wordstars = wordstars + "*";}
+    guesses = [];
+    gameover = false;
+    currentattempts = 0;
+    multiletterattempt = 0;
+    userattempts.update();
+    usermulti.update();
+    stardisplay.update();
+    infomessage.update("Guess a letter or the entire word!");
+    userinput.value = "";
+    userinput.focus();
+});
+
+var userinput = document.getElementById("inputfield");
+userinput.addEventListener("keyup", function(event) {
+   if ((event.keyCode === 13) && (!gameover)) {
+       document.getElementById("inputbutton").click();
+   }
+   else if ((gameover)) {
+       document.getElementById("resetbutton").click();
+   }
+});
+
+var userclick = document.getElementById("inputbutton");
+userclick.addEventListener('click', function() {
+    if (!gameover) {
+        ismultiattempt = false;
+        if (isValid(userinput.value)) {
+            if (!ismultiattempt) {
+                replacestar(userinput.value.toLowerCase());
+            }
+        }
+        userinput.value = "";
+        userinput.focus();
+        if ((currentattempts === maxattempts) || (multiletterattempt === maxmultiattempts)) {
+            gameover = true;
+            infomessage.update("Attempt limit reached, the word was: \"" +selectedword+"\"");
+            console.log("gameover");
+        }
+        if (wordstars === selectedword) {
+            gameover = true;
+            infomessage.update("You have successfully guessed the word!")
+        }
+    }
+});
+
 function replacestar (letter) {
     if (guesses.includes(letter)) { //checks if letter was already guessed
-        currentattempts--;
         infomessage.update("You have already tried " + letter);
     }
     else {
@@ -74,7 +144,7 @@ function isValid(input) {
             if ((input.toLowerCase()) === (selectedword)) {
                 infomessage.update("You guessed the entire word successfully!");
                 document.getElementById("starredtext").innerHTML = selectedword;
-                document.gamover = true;
+                gameover = true;
                 return false;
             }
             multiletterattempt ++;
@@ -88,62 +158,6 @@ function isValid(input) {
         infomessage.update("Must use alphabetical letters only.")
     }
 }
-
-    var userinput = document.getElementById("inputfield");
-    userinput.addEventListener("keyup", function(event) {
-       if (event.keyCode === 13) {
-           document.getElementById("inputbutton").click();
-       }
-    });
-
-    var userclick = document.getElementById("inputbutton");
-    userclick.addEventListener('click', function() {
-        ismultiattempt = false;
-        if (isValid(userinput.value)) {
-            if (!ismultiattempt) {
-            replacestar(userinput.value.toLowerCase()); }
-        }
-        userinput.value = "";
-        userinput.focus();
-    });
-
-    var infomessage = document.getElementById("infomessage");
-    infomessage.update = function (infostring) {
-        infomessage.innerHTML = infostring;
-    }
-
-    var userattempts = document.getElementById("attemptsremain");
-    userattempts.update = function () {
-        userattempts.innerHTML = ((maxattempts - currentattempts) + " attempts remain.");
-    }
-
-    var usermulti = document.getElementById("multiremain");
-    usermulti.update = function () {
-        usermulti.innerHTML = ((maxmultiattempts - multiletterattempt) + " multi-guess attempts remain.");
-    }
-
-    var stardisplay = document.getElementById("starredtext");
-    stardisplay.update = function () {
-        stardisplay.innerHTML = wordstars;
-    }
-
-    var userreset = document.getElementById("resetbutton");
-    userreset.addEventListener('click', function() {
-        words = random_words({exactly: 1, minLength: 8, maxlength: 8});
-        selectedword = words[0].toLowerCase();
-        console.log(selectedword);
-        wordstars = "";
-        for (let i = 0; i < words[0].length; i++) { wordstars = wordstars + "*";}
-        guesses = [];
-        currentattempts = 0;
-        multiletterattempt = 0;
-        userattempts.update();
-        usermulti.update();
-        stardisplay.update();
-        infomessage.update("Guess a letter or the entire word!");
-        userinput.value = "";
-        userinput.focus();
-    });
 
     userinput.focus();
     document.getElementById("starredtext").innerHTML = wordstars;
