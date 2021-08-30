@@ -71,7 +71,7 @@ function isValid(input) {
             return true;
         }
         else {
-            if ((input) === (selectedword)) {
+            if ((input.toLowerCase()) === (selectedword)) {
                 infomessage.update("You guessed the entire word successfully!");
                 document.getElementById("starredtext").innerHTML = selectedword;
                 document.gamover = true;
