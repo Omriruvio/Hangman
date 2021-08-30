@@ -110,6 +110,7 @@ function isValid(input) {
         infomessage.innerHTML = infostring;
     }
 
+    userinput.focus();
     document.getElementById("starredtext").innerHTML = wordstars;
 
 // while (!gameover) {
