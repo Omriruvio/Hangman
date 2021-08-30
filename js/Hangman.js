@@ -1,7 +1,7 @@
 
 $(window).on('load', function () {
 
-const words = random_words({exactly: 1, minLength: 8, maxlength: 8});
+var words = random_words({exactly: 1, minLength: 8, maxlength: 8});
 // var word = (Math.floor(Math.random() * words.length));
 selectedword = words[0].toLowerCase();
 
@@ -19,8 +19,6 @@ var guesses = [];
 for (let i = 0; i < words[0].length; i++) {
     wordstars = wordstars + "*";
     } //create encrypted word
-
-
 
 function replacestar (letter) {
     if (guesses.includes(letter)) { //checks if letter was already guessed
@@ -82,7 +80,6 @@ function isValid(input) {
             multiletterattempt ++;
             usermulti.update();
             infomessage.update("Word guess was incorrect!")
-            console.log("You have " + (maxmultiattempts - multiletterattempt) + " multi letter attempts remaining..." )
             ismultiattempt = true;
             return true;
         }
@@ -125,73 +122,31 @@ function isValid(input) {
         usermulti.innerHTML = ((maxmultiattempts - multiletterattempt) + " multi-guess attempts remain.");
     }
 
+    var stardisplay = document.getElementById("starredtext");
+    stardisplay.update = function () {
+        stardisplay.innerHTML = wordstars;
+    }
+
+    var userreset = document.getElementById("resetbutton");
+    userreset.addEventListener('click', function() {
+        words = random_words({exactly: 1, minLength: 8, maxlength: 8});
+        selectedword = words[0].toLowerCase();
+        console.log(selectedword);
+        wordstars = "";
+        for (let i = 0; i < words[0].length; i++) { wordstars = wordstars + "*";}
+        guesses = [];
+        currentattempts = 0;
+        multiletterattempt = 0;
+        userattempts.update();
+        usermulti.update();
+        stardisplay.update();
+        infomessage.update("Guess a letter or the entire word!");
+        userinput.value = "";
+        userinput.focus();
+    });
+
     userinput.focus();
     document.getElementById("starredtext").innerHTML = wordstars;
 
-// while (!gameover) {
-//
-// }
+})
 
-// for (currentattempts; currentattempts < maxattempts; currentattempts++) {
-//
-//     document.getElementById("inputbutton").addEventListener('click', function() {
-//         userletter = document.getElementById("inputfield").value;
-//         ismultiattempt = false;
-//         document.getElementById("starredtext").innerHTML = wordstars;
-//         // console.log("You have " + (maxattempts - currentattempts) + " regular attempts remaining.");
-//         document.getElementById("attemptsremain").innerHTML = ((maxattempts - currentattempts) + " regular attempts remain.");
-//         // console.log((maxmultiattempts - multiletterattempt) + " multi-letter attempts remain.");
-//         document.getElementById("multiremain").innerHTML = ((maxmultiattempts - multiletterattempt) + " multi-guess attempts remain.");
-//         console.log(wordstars);
-//         console.log("inside function attempts : " + currentattempts);
-//
-//         // var userletter = window.prompt("Guess a letter:").toLowerCase();
-//
-//
-//         if (!instantwin(userletter)) {
-//             if (!isValid(userletter)){
-//                  currentattempts--;
-//             }
-//             else {
-//                 if (selectedword.indexOf(userletter) > -1) {
-//                         currentindex = selectedword.indexOf(userletter);
-//                         wordstars = replacestar(wordstars, userletter);
-//
-//                         currentattempts--;
-//                         if (wordstars.indexOf("*") < 0) {
-//                             console.log("Success!!! The word was " + selectedword + "!")
-//                             return;
-//                         }
-//                     } //if letter exists, updates, checks if completed.
-//                 else {
-//                     if (!ismultiattempt) {
-//                         console.log(userletter + " letter does not exist.");
-//
-//                     }
-//                 }
-//             }
-//             if (currentattempts === (maxattempts-1)) {
-//                 console.log("No more guesses left");
-//                 console.log("The word was " + selectedword);
-//             }
-//             if (ismaxmulti()) {
-//                 console.log("You have spent " + maxmultiattempts + " multi letter attempts. This is the maximum. Goodbye.")
-//                 // break;
-//             }
-//         }
-//         else {
-//             console.log("You guessed the entire word successfully!");
-//             console.log("The word was " + selectedword + "!");
-//             // break;
-//
-//
-//         }
-//
-//     });
-//
-//
-//
-//
-// }
-
-});
