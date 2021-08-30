@@ -1,0 +1,97 @@
+body, html, pre, div {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #16272b;
+}
+
+#asciiwrap {
+	color: #999999;
+	margin: 8vh auto 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+
+#ascii {
+	font-size: 0.8em;
+	font-weight: bold;
+
+}
+
+#starred {
+	/*padding-top: 20px;*/
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: auto;
+	/*border: black solid 1px;*/
+}
+#starredtext {
+	letter-spacing: 0.3em;
+	color: #999999;
+	font-size: 8.5em;
+	min-height: 1.45em;
+	margin-top: 5vh;
+}
+
+#info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	justify-content: space-around;
+	/*border: black solid 1px;*/
+	height: 30vh;
+}
+
+#info div {
+	color: #999999;
+	font-size: 1.7em;
+
+
+}
+
+#infomessage {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: auto;
+	color: #999999;
+	font-size: 3.5em;
+	text-align: center;
+}
+
+#inputwrap {
+	margin-left: 1vh;
+	margin-right: 1vh;
+	max-width: 600px;
+	line-height: 0.7em;
+}
+
+#inputbutton {
+
+}
+
+
+
+
+/*// Extra small devices (portrait phones, less than 576px)*/
+/*// No media query since this is the default in Bootstrap*/
+/*// Extra large devices (large desktops, 1200px and up)*/
+@media (max-width: 1200px) {  }
+/*// Large devices (desktops, 992px and up)*/
+@media (max-width: 992px) { #ascii {font-size: 0.75em;} #starredtext {font-size: 6em;} #info div {font-size: 1.4em;} #finalmessage {font-size: 3em;} #infomessage {font-size: 3em;}}
+/*// Medium devices (tablets, 768px and up)*/
+@media (max-width: 768px) { #ascii {font-size: 0.55em;} #starredtext {font-size: 5em;} #info div {font-size: 1.2em;}#finalmessage {font-size: 2.5em;} #infomessage {font-size: 2.5em;}}
+/*// Small devices (landscape phones, 576px and up)*/
+@media (max-width: 576px) { #asciiwrap {margin-top: 4vh} #ascii {font-size: 0.37em;} #starredtext {font-size: 3em;} #info div {font-size: 1em;}#finalmessage {font-size: 1.7em;} #infomessage {font-size: 1.68em;}}
+
+
+
+
+
