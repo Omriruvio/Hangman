@@ -171,6 +171,7 @@ function isValid(input) {
 }
 
     userinput.focus();
+    stardisplay.update();
 
 })
 

@@ -84,7 +84,7 @@ body {
   padding: 40px 0;
   font-weight: 800;
   text-transform: uppercase;
-  /*overflow: hidden;*/
+  overflow: hidden;
 	text-align: center;
 	color: #402d2d;
 	letter-spacing: 0.3em;
