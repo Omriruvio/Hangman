@@ -36,7 +36,11 @@ usermulti.update = function () {
 var stardisplay = document.querySelector(".starredtext");
 stardisplay.update = function () {
     stardisplay.innerHTML = wordstars;
+    stardisplay.animate();
 
+}
+
+stardisplay.animate = function () {
     textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
     anime.timeline({loop: false})
         .add({
@@ -57,6 +61,28 @@ stardisplay.update = function () {
         });
 }
 
+stardisplay.animateletter = function (array) {
+
+    textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+    for (let i = 0; i < (array.length); i++) {
+        let currentletter = 'body > h1 > span:nth-child(' + (array[i]+1) + ')';
+        anime.timeline({loop: false})
+            .add({
+            targets: currentletter,
+            rotateY: [-120, 0],
+            duration: 8000,
+            delay: (el, i) => 45 * i
+            }).add({
+            targets: '.ml10',
+            opacity: 0,
+            duration: 1000,
+            easing: "easeOutExpo",
+            delay: 1000
+            });
+    }
+
+}
 
 var userreset = document.getElementById("resetbutton");
 userreset.addEventListener('click', function() {
@@ -117,28 +143,24 @@ function replacestar (letter) {
     else {
     splitword = wordstars.split("");
     appearances = 0
-    for (var d = 0; d < wordstars.length; d++)
+    discoveredindex = [];
 
-        if (selectedword[d] === letter) {
-            splitword[d] = letter;
+    for (let i = 0; i < wordstars.length; i++)
+
+        if (selectedword[i] === letter) { //checks if letter exists in selectedword
+            discoveredindex.push(i);
+            splitword[i] = letter;
             appearances ++;
         }
     if (appearances > 0) {
-        if (appearances === 1) {
-            guesses.push(letter);
-            infomessage.update(letter + " appeared once.")
-        }
-        if (appearances === 2){
-            guesses.push(letter);
-            infomessage.update(letter + " appears twice.")
-        }
-        if (appearances >= 3) {
-            guesses.push(letter);
-            infomessage.update(letter + " appears three or more times.")
-        }
+        if (appearances === 1) {infomessage.update(letter + " appeared once.")}
+        if (appearances === 2) {infomessage.update(letter + " appears twice.")}
+        if (appearances >= 3)  {infomessage.update(letter + " appears three or more times.")}
+        guesses.push(letter); // adds letter to guessed letters array
         wordstars = splitword.join("");
         document.querySelector(".starredtext").innerHTML = wordstars;
-        return wordstars;
+
+        stardisplay.animateletter(discoveredindex);
 
     }
     else {
@@ -148,7 +170,6 @@ function replacestar (letter) {
     }
 
     wordstars = splitword.join("");
-    return wordstars;
     }
 
 } //checks if input appears in word, announces amount of appearances and updates revealed word.
