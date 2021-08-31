@@ -4,6 +4,22 @@ body, html, pre, div {
 	box-sizing: border-box;
 }
 
+/*Scroll bar shenanigans*/
+body::-webkit-scrollbar {
+  	/*width: 15px;*/
+	background-color: #1e2122;
+	color: #a29c91
+}
+
+body::-webkit-scrollbar-corner {
+	background-color: #17191a;
+}
+
+body::-webkit-scrollbar-thumb {
+	background-color: #424649;
+}
+/*End Scroll bar shenanigans*/
+
 body {
 	background-color: #16272b;
 }
@@ -69,6 +85,49 @@ body {
 
 #inputfield {
 	text-align: center;
+	color: #999999;
+	background-color: transparent;
+	border-color: #01050d40;
+	transition: border 0.5s ease-in-out, background-color 0.8s ease-in-out;
+	border-radius: 0.25rem;
+	margin: auto 3px auto;
+	box-shadow: unset;
+}
+
+#inputfield:focus {
+	border-color: #00b10250;
+	border-width: 1px;
+    box-shadow: transparent;
+	background-color: #0d161a;
+}
+
+
+#inputfield:hover {
+	box-shadow: 0 0 0 .05rem #00a40240;
+}
+
+#inputbutton, #resetbutton {
+	border-color: #01050d40;
+}
+
+#inputbutton:hover, #resetbutton:hover {
+	background-color: #0d161a;
+}
+
+.btn-outline-secondary:active {
+    color: #fff;
+    background-color: #00b10250;
+    border-color: #00b10250;
+}
+
+#inputbutton {
+	/*border-left: 0;*/
+}
+
+#resetbutton {
+	/*border-right: 0;*/
+	border-top-right-radius: 0.25rem;
+	border-bottom-right-radius: 0.25rem;
 }
 
 .starredtext {

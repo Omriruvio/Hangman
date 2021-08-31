@@ -40,28 +40,26 @@ stardisplay.update = function () {
 
 }
 
-stardisplay.animate = function () {
+stardisplay.animate = function () { // starred text animation
     textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
     anime.timeline({loop: false})
-        .add({
+      .add({
         targets: '.starredtext .letter',
-        translateY: ["-0.7em", 0],
-        // translateX: ["0.55em", 0],
-        translateZ: 0,
-        rotateZ: [180, 0],
-        duration: 750,
-        easing: "easeOutExpo",
-        delay: (el, i) => 50 * i
-        }).add({
+        scale: [0,1],
+        opacity: [0,1],
+        easing: "easeOutCirc",
+        duration: 800,
+        delay: (el, i) => 400 * i
+      }).add({
         targets: '.starredtext',
         opacity: 100,
         duration: 1000,
         easing: "easeOutExpo",
         delay: 1000
-        });
+      });
 }
 
-stardisplay.animateletter = function (array) {
+stardisplay.animateletter = function (array) { // letter reveal animation
 
     textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
 
@@ -71,7 +69,7 @@ stardisplay.animateletter = function (array) {
             .add({
             targets: currentletter,
             rotateY: [-120, 0],
-            duration: 8000,
+            duration: 15000,
             delay: (el, i) => 45 * i
             }).add({
             targets: '.ml10',
@@ -199,8 +197,8 @@ function isValid(input) {
     }
 }
 
-    userinput.focus();
-    stardisplay.update();
+userinput.focus();
+stardisplay.update();
 
 })
 
