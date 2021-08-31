@@ -14,7 +14,7 @@ var ismultiattempt = false;
 var userletter = "";
 var gameover = false;
 var guesses = [];
-var textWrapper = document.querySelector('.ml16');
+var textWrapper = document.querySelector('.starredtext');
 
 for (let i = 0; i < words[0].length; i++) { wordstars = wordstars + "*"; } //create encrypted word
 
@@ -33,7 +33,7 @@ usermulti.update = function () {
     usermulti.innerHTML = ((maxmultiattempts - multiletterattempt) + " word attempts remain.");
 }
 
-var stardisplay = document.querySelector(".ml16");
+var stardisplay = document.querySelector(".starredtext");
 stardisplay.update = function () {
     stardisplay.innerHTML = wordstars;
 
@@ -41,7 +41,7 @@ stardisplay.update = function () {
 
     anime.timeline({loop: false})
       .add({
-        targets: '.ml16 .letter',
+        targets: '.starredtext .letter',
         translateY: [-80,0],
         easing: "easeOutExpo",
         duration: 1400,
@@ -129,7 +129,7 @@ function replacestar (letter) {
             infomessage.update(letter + " appears three or more times.")
         }
         wordstars = splitword.join("");
-        document.querySelector(".ml16").innerHTML = wordstars;
+        document.querySelector(".starredtext").innerHTML = wordstars;
         return wordstars;
 
     }
@@ -154,7 +154,7 @@ function isValid(input) {
         else {
             if ((input.toLowerCase()) === (selectedword)) {
                 infomessage.update("You guessed the entire word successfully!");
-                document.querySelector(".ml16").innerHTML = selectedword;
+                document.querySelector(".starredtext").innerHTML = selectedword;
                 gameover = true;
                 return false;
             }

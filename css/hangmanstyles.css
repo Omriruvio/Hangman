@@ -32,13 +32,6 @@ body {
 	margin: auto;
 	/*border: black solid 1px;*/
 }
-#starredtext {
-	letter-spacing: 0.3em;
-	color: #999999;
-	font-size: 8.5em;
-	min-height: 1.45em;
-	margin-top: 5vh;
-}
 
 #info {
 	display: flex;
@@ -78,15 +71,13 @@ body {
 	text-align: center;
 }
 
-/*experimental*/
-.ml16 {
 
-  padding: 40px 0;
-  font-weight: 800;
-  text-transform: uppercase;
-  overflow: hidden;
+.starredtext {
+
+	padding: 40px 0;
+	font-weight: 800;
+	text-transform: uppercase;
 	text-align: center;
-	color: #402d2d;
 	letter-spacing: 0.3em;
 	color: #999999;
 	font-size: 8.5em;
@@ -94,12 +85,12 @@ body {
 	margin-top: 5vh;
 }
 
-.ml16 .letter {
+.starredtext .letter {
   display: inline-block;
   line-height: 1em;
 }
 
-/*end experimental*/
+
 
 
 
@@ -108,11 +99,11 @@ body {
 /*// Extra large devices (large desktops, 1200px and up)*/
 @media (max-width: 1200px) {  }
 /*// Large devices (desktops, 992px and up)*/
-@media (max-width: 992px) { #ascii {font-size: 0.75em;} .ml16 {font-size: 6em;} #info div {font-size: 1.4em;} #finalmessage {font-size: 3em;} #infomessage {font-size: 3em;}}
+@media (max-width: 992px) { #ascii {font-size: 0.75em;} .starredtext {font-size: 6em;} #info div {font-size: 1.4em;} #finalmessage {font-size: 3em;} #infomessage {font-size: 3em;}}
 /*// Medium devices (tablets, 768px and up)*/
-@media (max-width: 768px) { #ascii {font-size: 0.55em;} .ml16 {font-size: 5em;} #info div {font-size: 1.2em;}#finalmessage {font-size: 2.5em;} #infomessage {font-size: 2.5em;}}
+@media (max-width: 768px) { #ascii {font-size: 0.55em;} .starredtext {font-size: 5em;} #info div {font-size: 1.2em;}#finalmessage {font-size: 2.5em;} #infomessage {font-size: 2.5em;}}
 /*// Small devices (landscape phones, 576px and up)*/
-@media (max-width: 576px) { #asciiwrap {margin-top: 4vh} #ascii {font-size: 0.37em;} .ml16 {font-size: 3em;} #info div {font-size: 1em;}#finalmessage {font-size: 1.7em;} #infomessage {font-size: 1.68em;}}
+@media (max-width: 576px) { #asciiwrap {margin-top: 4vh} #ascii {font-size: 0.37em;} .starredtext {font-size: 3em;} #info div {font-size: 1em;}#finalmessage {font-size: 1.7em;} #infomessage {font-size: 1.68em;}}
 
 
 
