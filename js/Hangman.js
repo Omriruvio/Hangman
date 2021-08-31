@@ -1,7 +1,7 @@
 
 $(window).on('load', function () {
 
-var words = random_words({exactly: 1, maxlength: 8});
+var words = random_words({exactly: 1, maxlength: 8, minLength: 5});
 selectedword = words[0].toLowerCase();
 
 console.log(selectedword);
@@ -14,10 +14,9 @@ var ismultiattempt = false;
 var userletter = "";
 var gameover = false;
 var guesses = [];
+var textWrapper = document.querySelector('.ml16');
 
-for (let i = 0; i < words[0].length; i++) {
-    wordstars = wordstars + "*";
-    } //create encrypted word
+for (let i = 0; i < words[0].length; i++) { wordstars = wordstars + "*"; } //create encrypted word
 
 var infomessage = document.getElementById("infomessage");
 infomessage.update = function (infostring) {
@@ -34,10 +33,22 @@ usermulti.update = function () {
     usermulti.innerHTML = ((maxmultiattempts - multiletterattempt) + " word attempts remain.");
 }
 
-var stardisplay = document.getElementById("starredtext");
+var stardisplay = document.querySelector(".ml16");
 stardisplay.update = function () {
     stardisplay.innerHTML = wordstars;
+
+    textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+    anime.timeline({loop: false})
+      .add({
+        targets: '.ml16 .letter',
+        translateY: [-80,0],
+        easing: "easeOutExpo",
+        duration: 1400,
+        delay: (el, i) => 30 * i
+      });
 }
+
 
 var userreset = document.getElementById("resetbutton");
 userreset.addEventListener('click', function() {
@@ -118,7 +129,7 @@ function replacestar (letter) {
             infomessage.update(letter + " appears three or more times.")
         }
         wordstars = splitword.join("");
-        document.getElementById("starredtext").innerHTML = wordstars;
+        document.querySelector(".ml16").innerHTML = wordstars;
         return wordstars;
 
     }
@@ -143,7 +154,7 @@ function isValid(input) {
         else {
             if ((input.toLowerCase()) === (selectedword)) {
                 infomessage.update("You guessed the entire word successfully!");
-                document.getElementById("starredtext").innerHTML = selectedword;
+                document.querySelector(".ml16").innerHTML = selectedword;
                 gameover = true;
                 return false;
             }
@@ -160,7 +171,6 @@ function isValid(input) {
 }
 
     userinput.focus();
-    document.getElementById("starredtext").innerHTML = wordstars;
 
 })
 
