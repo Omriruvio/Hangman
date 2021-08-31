@@ -1,7 +1,7 @@
 
 $(window).on('load', function () {
 
-var words = random_words({exactly: 1, maxlength: 8, minLength: 5});
+var words = random_words({exactly: 1, minLength: 6});
 selectedword = words[0].toLowerCase();
 
 console.log(selectedword);
@@ -38,15 +38,23 @@ stardisplay.update = function () {
     stardisplay.innerHTML = wordstars;
 
     textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-
     anime.timeline({loop: false})
-      .add({
+        .add({
         targets: '.starredtext .letter',
-        translateY: [-80,0],
+        translateY: ["-0.7em", 0],
+        // translateX: ["0.55em", 0],
+        translateZ: 0,
+        rotateZ: [180, 0],
+        duration: 750,
         easing: "easeOutExpo",
-        duration: 1400,
-        delay: (el, i) => 30 * i
-      });
+        delay: (el, i) => 50 * i
+        }).add({
+        targets: '.starredtext',
+        opacity: 100,
+        duration: 1000,
+        easing: "easeOutExpo",
+        delay: 1000
+        });
 }
 
 

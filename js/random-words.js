@@ -278,7 +278,7 @@ function random_words(options) {
     var wordUsed;
     while (!rightSize) {
       wordUsed = generateRandomWord();
-      if(wordUsed.length >= options.minLength) {
+      if((wordUsed.length >= options.minLength)&&(wordUsed.length <= 8)) {
         rightSize = true;
       }
 
