@@ -4,6 +4,15 @@ body, html, pre, div {
 	box-sizing: border-box;
 }
 
+h1.customfont {
+	font-family: "My Custom Font", Verdana, Tahoma;
+	text-align: center;
+	color: #999999;
+	margin-top: 10vh;
+	font-size: 7em;
+	letter-spacing: 0.06em;
+}
+
 /*Scroll bar shenanigans*/
 body::-webkit-scrollbar {
   	/*width: 15px;*/
