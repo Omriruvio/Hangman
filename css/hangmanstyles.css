@@ -65,7 +65,7 @@ body {
 	text-align: center;
 	justify-content: space-around;
 	/*border: black solid 1px;*/
-	height: 30vh;
+	height: 20vh;
 }
 
 #info div {
@@ -75,30 +75,12 @@ body {
 
 }
 
-#attemptbar {
-	position: absolute;
-	left: 0;
-	border: 1px solid black;
-	width: 10%;
-	height: 10vh;
-}
-
-
-/*#infomessage {*/
-/*	display: flex;*/
-/*	align-items: center;*/
-/*	justify-content: center;*/
-/*	margin: auto;*/
-/*	color: #999999;*/
-/*	font-size: 3.5em;*/
-/*	text-align: center;*/
-/*}*/
-
 #inputwrap {
-	margin-left: 1vh;
-	margin-right: 1vh;
+	/*margin-left: 1vh;*/
+	/*margin-right: 1vh;*/
 	max-width: 600px;
 	line-height: 0.7em;
+	margin: auto;
 }
 
 #inputfield {
@@ -150,8 +132,10 @@ body {
 }
 
 .starredtext {
-
-	padding: 5vh 0 15vh;
+	display:flex;
+	text-align: center;
+	justify-content: center;
+	padding: 5vh 0;
 	font-weight: 800;
 	text-transform: uppercase;
 	text-align: center;
@@ -214,11 +198,11 @@ body {
 /*// Extra large devices (large desktops, 1200px and up)*/
 @media (max-width: 1200px) { h1.customfont{font-size: 7em} }
 /*// Large devices (desktops, 992px and up)*/
-@media (max-width: 992px) { h1.customfont{font-size: 6.5em } #ascii {font-size: 0.75em;} .starredtext {font-size: 6em;} #info div {font-size: 1.4em;} #finalmessage {font-size: 3em;} .infosection {font-size: 2.3em;}}
+@media (max-width: 992px) { h1.customfont{font-size: 6.5em } #ascii {font-size: 0.75em;} .starredtext {font-size: 6em;} #info div {font-size: 1.4em;} #finalmessage {font-size: 3em;} .infosection {font-size: 2.3em;} div#info {height: 13vh; margin:3.5vh auto 5vh;}}
 /*// Medium devices (tablets, 768px and up)*/
-@media (max-width: 768px) { h1.customfont{font-size: 5.5em } #ascii {font-size: 0.55em;} .starredtext {font-size: 5em;} #info div {font-size: 1.2em;}#finalmessage {font-size: 2.5em;} .infosection {font-size: 1.7em;}}
+@media (max-width: 768px) { h1.customfont{font-size: 5.5em } #ascii {font-size: 0.55em;} .starredtext {font-size: 5em;} #info div {font-size: 1.2em;}#finalmessage {font-size: 2.5em;} .infosection {font-size: 1.7em;} div#info {height: 13vh; margin:3.5vh auto 5vh;}}
 /*// Small devices (landscape phones, 576px and up)*/
-@media (max-width: 576px) { h1.customfont{font-size: 4em } #asciiwrap {margin-top: 4vh} #ascii {font-size: 0.37em;} .starredtext {font-size: 3em; height: 0.3vh;} #info div {font-size: 1em;}#finalmessage {font-size: 1.7em;} .infosection {font-size: 1.3em;}}
+@media (max-width: 576px) { h1.customfont{font-size: 4em } #asciiwrap {margin-top: 4vh} #ascii {font-size: 0.37em;} .starredtext {font-size: 3em; height: 0.3vh; margin-bottom: 10vh} #info div {font-size: 1em;}#finalmessage {font-size: 1.7em;} .infosection {font-size: 1.3em;} div#info {height: 8vh; margin: 2vh auto 2vh;}}
 
 
 
