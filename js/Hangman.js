@@ -15,13 +15,50 @@ var userletter = "";
 var gameover = false;
 var guesses = [];
 var textWrapper = document.querySelector('.starredtext');
+const welcomemsg = "Start here";
 
 for (let i = 0; i < words[0].length; i++) { wordstars = wordstars + "*"; } //create encrypted word
 
-var infomessage = document.getElementById("infomessage");
+var infomessage = document.querySelector(".infomessage");
 infomessage.update = function (infostring) {
     infomessage.innerHTML = infostring;
+    // Wrap every letter in a span
+    var textWrapper = document.querySelector('.infosection .infomessage');
+    textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+    anime.timeline({loop: false})
+      .add({
+        targets: '.infosection .line',
+        scaleX: [0,1],
+        opacity: [0.5,1],
+        easing: "easeInOutExpo",
+        duration: 900
+      }).add({
+        targets: '.infosection .letter',
+        opacity: [0,1],
+        translateX: [40,0],
+        translateZ: 0,
+        scaleX: [0.3, 1],
+        easing: "easeOutExpo",
+        duration: 800,
+        offset: '-=600',
+        delay: (el, i) => 150 + 25 * i
+      }).add({
+        targets: '.infosection',
+        opacity: 1,
+        duration: 1000,
+        easing: "easeOutExpo",
+        delay: 1000
+      });
 }
+infomessage.update.correctguess = function () {
+    document.querySelector(".infosection .line").setAttribute("style", "background-color: green;");
+}
+infomessage.update.incorrectguess = function () {
+    document.querySelector(".infosection .line").setAttribute("style", "background-color: red;");
+}
+
+
 
 var userattempts = document.getElementById("attemptsremain");
 userattempts.update = function () {
@@ -39,6 +76,8 @@ stardisplay.update = function () {
     stardisplay.animate();
 
 }
+
+
 
 stardisplay.animate = function () { // starred text animation
     textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
@@ -124,7 +163,8 @@ userclick.addEventListener('click', function() {
         userinput.focus();
         if ((currentattempts === maxattempts) || (multiletterattempt === maxmultiattempts)) {
             gameover = true;
-            infomessage.update("Attempt limit reached, the word was: \"" +selectedword+"\"");
+            infomessage.update("Unfortunate, the word was: \"" +selectedword+"\"");
+            infomessage.update.incorrectguess();
             console.log("gameover");
         }
         if (wordstars === selectedword) {
@@ -151,10 +191,10 @@ function replacestar (letter) {
             appearances ++;
         }
     if (appearances > 0) {
+        infomessage.update.correctguess();
         if (appearances === 1) {infomessage.update(letter + " appeared once.")}
         if (appearances === 2) {infomessage.update(letter + " appears twice.")}
         if (appearances >= 3)  {infomessage.update(letter + " appears three or more times.")}
-        guesses.push(letter); // adds letter to guessed letters array
         wordstars = splitword.join("");
         document.querySelector(".starredtext").innerHTML = wordstars;
 
@@ -162,11 +202,12 @@ function replacestar (letter) {
 
     }
     else {
+        infomessage.update.incorrectguess();
         infomessage.update("Letter did not exist!");
-        currentattempts++;
         userattempts.update();
     }
-
+    currentattempts++;
+    guesses.push(letter); // adds letter to guessed letters array
     wordstars = splitword.join("");
     }
 
@@ -199,6 +240,7 @@ function isValid(input) {
 
 userinput.focus();
 stardisplay.update();
+infomessage.update(welcomemsg);
 
 })
 

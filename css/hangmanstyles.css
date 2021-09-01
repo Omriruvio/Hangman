@@ -66,15 +66,15 @@ body {
 
 }
 
-#infomessage {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin: auto;
-	color: #999999;
-	font-size: 3.5em;
-	text-align: center;
-}
+/*#infomessage {*/
+/*	display: flex;*/
+/*	align-items: center;*/
+/*	justify-content: center;*/
+/*	margin: auto;*/
+/*	color: #999999;*/
+/*	font-size: 3.5em;*/
+/*	text-align: center;*/
+/*}*/
 
 #inputwrap {
 	margin-left: 1vh;
@@ -152,6 +152,38 @@ body {
   line-height: 1em;
 }
 
+.infosection {
+	font-weight: 200;
+	font-size: 2.5em;
+	text-align: center;
+	color: #999999;
+}
+
+.infosection .text-wrapper {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.1em;
+  padding-right: 0.05em;
+  padding-bottom: 0.15em;
+}
+
+.infosection .line {
+	opacity: 0;
+	position: absolute;
+	left: 0;
+	height: 2px;
+	width: 100%;
+	background-color: #fff;
+	transform-origin: 100% 100%;
+	bottom: 0;
+	color: #00b10250;
+}
+
+.infosection .letter {
+  display: inline-block;
+  line-height: 1em;
+}
+
 
 
 
@@ -161,11 +193,11 @@ body {
 /*// Extra large devices (large desktops, 1200px and up)*/
 @media (max-width: 1200px) {  }
 /*// Large devices (desktops, 992px and up)*/
-@media (max-width: 992px) { #ascii {font-size: 0.75em;} .starredtext {font-size: 6em;} #info div {font-size: 1.4em;} #finalmessage {font-size: 3em;} #infomessage {font-size: 3em;}}
+@media (max-width: 992px) { #ascii {font-size: 0.75em;} .starredtext {font-size: 6em;} #info div {font-size: 1.4em;} #finalmessage {font-size: 3em;} .infosection {font-size: 2.3em;}}
 /*// Medium devices (tablets, 768px and up)*/
-@media (max-width: 768px) { #ascii {font-size: 0.55em;} .starredtext {font-size: 5em;} #info div {font-size: 1.2em;}#finalmessage {font-size: 2.5em;} #infomessage {font-size: 2.5em;}}
+@media (max-width: 768px) { #ascii {font-size: 0.55em;} .starredtext {font-size: 5em;} #info div {font-size: 1.2em;}#finalmessage {font-size: 2.5em;} .infosection {font-size: 1.7em;}}
 /*// Small devices (landscape phones, 576px and up)*/
-@media (max-width: 576px) { #asciiwrap {margin-top: 4vh} #ascii {font-size: 0.37em;} .starredtext {font-size: 3em;} #info div {font-size: 1em;}#finalmessage {font-size: 1.7em;} #infomessage {font-size: 1.68em;}}
+@media (max-width: 576px) { #asciiwrap {margin-top: 4vh} #ascii {font-size: 0.37em;} .starredtext {font-size: 3em;} #info div {font-size: 1em;}#finalmessage {font-size: 1.7em;} .infosection {font-size: 1.3em;}}
 
 
 
