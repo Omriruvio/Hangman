@@ -204,9 +204,10 @@ function replacestar (letter) {
     else {
         infomessage.update.incorrectguess();
         infomessage.update("Letter did not exist!");
+        currentattempts++;
         userattempts.update();
     }
-    currentattempts++;
+
     guesses.push(letter); // adds letter to guessed letters array
     wordstars = splitword.join("");
     }
