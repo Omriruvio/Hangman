@@ -3,8 +3,9 @@ $(window).on('load', function () {
 
 var words = random_words({exactly: 1, minLength: 6});
 selectedword = words[0].toLowerCase();
-
 console.log(selectedword);
+
+var game = {}
 var wordstars = "";
 var maxattempts = 10;
 var currentattempts = 0;
