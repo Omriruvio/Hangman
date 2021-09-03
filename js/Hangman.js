@@ -1,8 +1,9 @@
 
 $(window).on('load', function () {
 
-var words = ['hello world', 'aa strange aworld'];
-var currentword = words[1];
+var words = random_words({exactly: 1, minLength: 6});
+selectedword = words[0].toLowerCase();
+var currentword = words[0];
 selectedword = currentword.toLowerCase();
 console.log(selectedword);
 
@@ -28,7 +29,6 @@ for (let i = 0; i < currentword.length; i++) { //create encrypted word
     else {
         wordstars = wordstars + "*";
     }
-    console.log(wordstars)
 }
 
 var infomessage = document.querySelector(".infomessage");
@@ -140,10 +140,10 @@ stardisplay.animateletter = function (array) { // letter reveal animation
 var userreset = document.getElementById("resetbutton");
 userreset.addEventListener('click', function() {
     words = random_words({exactly: 1, minLength: 8, maxlength: 8});
-    selectedword = currentword.toLowerCase();
+    selectedword = words[0].toLowerCase();
     console.log(selectedword);
     wordstars = "";
-    for (let i = 0; i < currentword.length; i++) { wordstars = wordstars + "*";}
+    for (let i = 0; i < words[0].length; i++) { wordstars = wordstars + "*";}
     guesses = [];
     gameover = false;
     currentattempts = 0;
@@ -190,7 +190,7 @@ userclick.addEventListener('click', function() {
     }
 });
 
-function existing (value, array) {
+function existing (value, array) { // checks if value exists in array or nested arrays
     for (let i =0; i < array.length; i++) {
         if (array[i].includes(value) === true) {
             return true;
@@ -198,9 +198,8 @@ function existing (value, array) {
     }
 }
 
-function wordletterindex(array) {
+function wordletterindex(array) { // returns a nested array of [wordnumber][letterlocation]
     let wordletterindex = [];
-    console.log(spaceindex[3]);
     for (let i=0; i < (spaceindex.length +1); i++) { // for every word
         let currentletterarray = [];
         for (let n=0; n < array.length; n++) { // for every letter
@@ -240,9 +239,7 @@ function replacestar (letter) {
         wordstars = splitword.join("");
         document.querySelector(".starredtext").innerHTML = wordstars;
 
-        let indices = wordletterindex(discoveredindex);
-        console.log(indices);
-
+        let indices = wordletterindex(discoveredindex); // returns a nested array of [wordnumber][letterlocation]
         stardisplay.animateletter(indices);  // updates the revealed letter display with animation
 
     }
