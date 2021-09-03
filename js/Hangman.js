@@ -1,8 +1,9 @@
 
 $(window).on('load', function () {
 
-var words = random_words({exactly: 1, minLength: 6});
-selectedword = words[0].toLowerCase();
+var words = ['hello world', 'aa strange aworld'];
+var currentword = words[1];
+selectedword = currentword.toLowerCase();
 console.log(selectedword);
 
 var game = {}
@@ -17,8 +18,18 @@ var gameover = false;
 var guesses = [];
 var textWrapper = document.querySelector('.starredtext');
 const welcomemsg = "Start here";
+var spaceindex = [];
 
-for (let i = 0; i < words[0].length; i++) { wordstars = wordstars + "*"; } //create encrypted word
+for (let i = 0; i < currentword.length; i++) { //create encrypted word
+    if ((currentword[i]) === (' ')) {
+        wordstars += " "
+        spaceindex.push(i);
+    }
+    else {
+        wordstars = wordstars + "*";
+    }
+    console.log(wordstars)
+}
 
 var infomessage = document.querySelector(".infomessage");
 infomessage.update = function (infostring) {
@@ -73,7 +84,7 @@ usermulti.update = function () {
 
 var stardisplay = document.querySelector(".starredtext");
 stardisplay.update = function () {
-    stardisplay.innerHTML = wordstars;
+    stardisplay.innerHTML = (wordstars.replace(/\s/g, "<div class='wordseperator'>&nbsp</div>"));
     stardisplay.animate();
 
 }
@@ -100,35 +111,39 @@ stardisplay.animate = function () { // starred text animation
 }
 
 stardisplay.animateletter = function (array) { // letter reveal animation
-
+    stardisplay.innerHTML = (wordstars.replace(/\s/g, "<div class='wordseperator'>&nbsp</div>"));
     textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+    let lettercounter = -1;
 
-    for (let i = 0; i < (array.length); i++) {
-        let currentletter = 'body > h1 > span:nth-child(' + (array[i]+1) + ')';
-        anime.timeline({loop: false})
-            .add({
-            targets: currentletter,
-            rotateY: [-120, 0],
-            duration: 15000,
-            delay: (el, i) => 45 * i
-            }).add({
-            targets: '.ml10',
-            opacity: 0,
-            duration: 1000,
-            easing: "easeOutExpo",
-            delay: 1000
+    for (let i = 0; i < (array.length); i++) { // for every word
+        lettercounter ++
+        for (let n = 0; n < (array[i].length); n++) { // for every letter
+            let currentletter = 'body > h1 > span:nth-child(' + (array[i][n] + 1 - lettercounter) + ')';
+            anime.timeline({loop: false})
+                .add({
+                    targets: currentletter,
+                    rotateY: [-120, 0],
+                    duration: 15000,
+                    delay: (el, i) => 45 * i
+                }).add({
+                targets: '.ml10',
+                opacity: 0,
+                duration: 1000,
+                easing: "easeOutExpo",
+                delay: 1000
             });
+        }
+    }
     }
 
-}
 
 var userreset = document.getElementById("resetbutton");
 userreset.addEventListener('click', function() {
     words = random_words({exactly: 1, minLength: 8, maxlength: 8});
-    selectedword = words[0].toLowerCase();
+    selectedword = currentword.toLowerCase();
     console.log(selectedword);
     wordstars = "";
-    for (let i = 0; i < words[0].length; i++) { wordstars = wordstars + "*";}
+    for (let i = 0; i < currentword.length; i++) { wordstars = wordstars + "*";}
     guesses = [];
     gameover = false;
     currentattempts = 0;
@@ -175,6 +190,31 @@ userclick.addEventListener('click', function() {
     }
 });
 
+function existing (value, array) {
+    for (let i =0; i < array.length; i++) {
+        if (array[i].includes(value) === true) {
+            return true;
+        }
+    }
+}
+
+function wordletterindex(array) {
+    let wordletterindex = [];
+    console.log(spaceindex[3]);
+    for (let i=0; i < (spaceindex.length +1); i++) { // for every word
+        let currentletterarray = [];
+        for (let n=0; n < array.length; n++) { // for every letter
+            if (!existing(array[n], wordletterindex)) {
+                if ((array[n] < spaceindex[i]) || (spaceindex[i] === undefined)) {
+                    currentletterarray.push(array[n]);
+                }
+            }
+        }
+        wordletterindex[i] = currentletterarray;
+    }
+    return wordletterindex;
+}
+
 function replacestar (letter) {
     if (guesses.includes(letter)) { //checks if letter was already guessed
         infomessage.update("You have already tried " + letter);
@@ -184,13 +224,14 @@ function replacestar (letter) {
     appearances = 0
     discoveredindex = [];
 
-    for (let i = 0; i < wordstars.length; i++)
+    for (let i = 0; i < wordstars.length; i++) {
 
         if (selectedword[i] === letter) { //checks if letter exists in selectedword
             discoveredindex.push(i);
             splitword[i] = letter;
-            appearances ++;
+            appearances++;
         }
+    }
     if (appearances > 0) {
         infomessage.update.correctguess();
         if (appearances === 1) {infomessage.update(letter + " appeared once.")}
@@ -199,7 +240,10 @@ function replacestar (letter) {
         wordstars = splitword.join("");
         document.querySelector(".starredtext").innerHTML = wordstars;
 
-        stardisplay.animateletter(discoveredindex);
+        let indices = wordletterindex(discoveredindex);
+        console.log(indices);
+
+        stardisplay.animateletter(indices);  // updates the revealed letter display with animation
 
     }
     else {
