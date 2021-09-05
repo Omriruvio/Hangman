@@ -2,10 +2,14 @@
 $(window).on('load', function () {
 
 var words = random_words({exactly: 1, minLength: 6});
-selectedword = words[0].toLowerCase();
-var currentword = words[0];
-selectedword = currentword.toLowerCase();
-console.log(selectedword);
+var idioms = $.csv.toArrays(csvdata);
+idioms.getnew = function () {return (idioms[Math.floor(Math.random() * idioms.length)][0]).replace(/\W/g, ' ');};
+
+// var currentword = words[0].toLowerCase(); // get single word
+var currentword = (idioms.getnew()).toLowerCase(); // get idiom
+
+
+console.log(currentword);
 
 var game = {}
 var wordstars = "";
@@ -140,8 +144,8 @@ stardisplay.animateletter = function (array) { // letter reveal animation
 var userreset = document.getElementById("resetbutton");
 userreset.addEventListener('click', function() {
     words = random_words({exactly: 1, minLength: 8, maxlength: 8});
-    selectedword = words[0].toLowerCase();
-    console.log(selectedword);
+    currentword = words[0].toLowerCase();
+    console.log(currentword);
     wordstars = "";
     for (let i = 0; i < words[0].length; i++) { wordstars = wordstars + "*";}
     guesses = [];
@@ -179,11 +183,11 @@ userclick.addEventListener('click', function() {
         userinput.focus();
         if ((currentattempts === maxattempts) || (multiletterattempt === maxmultiattempts)) {
             gameover = true;
-            infomessage.update("Unfortunate, the word was: \"" +selectedword+"\"");
+            infomessage.update("Unfortunate, the word was: \"" +currentword+"\"");
             infomessage.update.incorrectguess();
             console.log("gameover");
         }
-        if (wordstars === selectedword) {
+        if (wordstars === currentword) {
             gameover = true;
             infomessage.update("You have successfully guessed the word!")
         }
@@ -225,7 +229,7 @@ function replacestar (letter) {
 
     for (let i = 0; i < wordstars.length; i++) {
 
-        if (selectedword[i] === letter) { //checks if letter exists in selectedword
+        if (currentword[i] === letter) { //checks if letter exists in currentword
             discoveredindex.push(i);
             splitword[i] = letter;
             appearances++;
@@ -263,9 +267,9 @@ function isValid(input) {
             return true;
         }
         else {
-            if ((input.toLowerCase()) === (selectedword)) {
+            if ((input.toLowerCase()) === (currentword)) {
                 infomessage.update("You guessed the entire word successfully!");
-                document.querySelector(".starredtext").innerHTML = selectedword;
+                document.querySelector(".starredtext").innerHTML = currentword;
                 gameover = true;
                 return false;
             }
