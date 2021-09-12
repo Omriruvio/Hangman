@@ -189,6 +189,20 @@ body {
   line-height: 1em;
 }
 
+/*#MainNavbar {*/
+/*	display: flex;*/
+
+/*}*/
+
+#MainNavbar > div {
+	justify-content: center;
+}
+
+#wordbutton, #phrasebutton {
+	margin-right: 12%;
+	margin-left: 12%;
+}
+
 
 
 
