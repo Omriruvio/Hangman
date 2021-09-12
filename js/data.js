@@ -838,7 +838,6 @@ var csvdata = 'A Bit Much,More than is reasonable; a bit too much\n' +
     'Like a Kid in a Candy Store,To be so excited about one\'s surroundings that one acts in a childlike or silly way\n' +
     'Like a Moth to a Flame,Drawn to something or someone despite the dangers\n' +
     '"Like Father, Like Son","Sons inherit their fathers\' traits and preferences, often even without realizing it."\n' +
-    'Like Shooting,Fish in a Barrel Very easy\n' +
     'Like Taking Candy from a Baby,Very easy\n' +
     'Like Two Peas in a Pod,Bearing a strong resemblance\n' +
     'Like The Cat That Got The Cream,"Looking particularly self-satisfied, often to the annoyance of others"\n' +

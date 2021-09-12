@@ -47,6 +47,34 @@ for (let i = 0; i < currentword.length; i++) { //create encrypted word
     }
 }
 
+function animatestars (result) {
+
+    $('.starredtext').hide();
+    $('.newstarredelement').remove();
+
+    let starredelement = document.getElementById("mainsection");
+    let newstarredelement = document.createElement("h1");
+    let mainsection = document.getElementById("mainsection");
+    newstarredelement.classList.add("newstarredelement");
+    mainsection.insertBefore(newstarredelement, mainsection.firstChild);
+
+    newstarredelement.innerHTML = "<h1 class='newstarredelement'>" + currentword + "</h1>";
+
+    newstarredelement.innerHTML = newstarredelement.textContent.replace(/\w+/g, "<span class='word'>$&</span>");
+    anime.timeline({loop: false}).add
+    ({
+        targets: '.newstarredelement .word',
+        scale: [14,1],
+        opacity: [0,1],
+        easing: "easeOutCirc",
+        duration: 1800,
+        delay: (el, i) => 800 * i
+    })
+
+    if (result === true) { $('#mainsection > h1.newstarredelement span').css('color', 'green') }
+    else { $('#mainsection > h1.newstarredelement span').css('color', 'red') }
+}
+
 var infomessage = document.querySelector(".infomessage");
 infomessage.update = function (infostring) {
     infomessage.innerHTML = infostring;
@@ -60,7 +88,7 @@ infomessage.update = function (infostring) {
         scaleX: [0,1],
         opacity: [0.5,1],
         easing: "easeInOutExpo",
-        duration: 900
+        duration: 900,
       }).add({
         targets: '.infosection .letter',
         opacity: [0,1],
@@ -181,6 +209,8 @@ var userreset = document.getElementById("resetbutton");
 userreset.addEventListener('click', function() {
     // doreset('word');
     currentword = '';
+    $('.newstarredelement').remove();
+    $('.starredtext').show();
 
     words = random_words({exactly: 1, minLength: 6});
     if (game.selectstate === 'word') {
@@ -236,12 +266,17 @@ userclick.addEventListener('click', function() {
         if ((currentattempts === maxattempts) || (multiletterattempt === maxmultiattempts)) {
             gameover = true;
             infomessage.update("Unfortunate, the word was: \"" +currentword+"\"");
+            animatestars(false);
             infomessage.update.incorrectguess();
             console.log("gameover");
         }
         if (wordstars === currentword) {
             gameover = true;
-            infomessage.update("You have successfully guessed the word!")
+            animatestars(true);
+            infomessage.update.correctguess();
+            infomessage.update("You have successfully guessed the word!");
+
+
         }
     }
 });
@@ -321,10 +356,12 @@ function isValid(input) {
         else {
             if ((input.toLowerCase()) === (currentword)) {
                 infomessage.update("You guessed the entire word successfully!");
-                document.querySelector(".starredtext").innerHTML = currentword;
+                // document.querySelector(".starredtext").innerHTML = currentword;
+                animatestars(true);
                 gameover = true;
                 return false;
             }
+            infomessage.update.incorrectguess();
             multiletterattempt ++;
             usermulti.update();
             infomessage.update("Word guess was incorrect!")
@@ -336,6 +373,8 @@ function isValid(input) {
         infomessage.update("Must use alphabetical letters only.")
     }
 }
+
+
 
 userinput.focus();
 stardisplay.update();
