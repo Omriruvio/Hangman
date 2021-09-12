@@ -4,12 +4,15 @@ $(window).on('load', function () {
 var words = random_words({exactly: 1, minLength: 6});
 var idioms = $.csv.toArrays(csvdata);
 idioms.getnew = function () {
-    let newidiom = idioms[Math.floor(Math.random() * idioms.length)][0];
+    newidiom = idioms[Math.floor(Math.random() * idioms.length)][0];
+    while (newidiom.length > 15) {
+        newidiom = idioms[Math.floor(Math.random() * idioms.length)][0]; }
     newidiom = newidiom.replace("'", ''); // remove apostrophes
     newidiom = newidiom.replace(/\W/g, ' '); // replace non alphanumeric char with space
     newidiom = newidiom.replace(/\s\s+/g, ' '); // replace multiple spaces with single space
     newidiom = newidiom.replace('excl', ''); // remove unwanted excl word from phrase
 
+    console.log(newidiom.length)
     return newidiom;
 };
 
