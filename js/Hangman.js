@@ -3,10 +3,14 @@ $(window).on('load', function () {
 
 var words = random_words({exactly: 1, minLength: 6});
 var idioms = $.csv.toArrays(csvdata);
-idioms.getnew = function () {return (idioms[Math.floor(Math.random() * idioms.length)][0]).replace(/\W/g, ' ');};
+idioms.getnew = function () {
+    let newidiom = (idioms[Math.floor(Math.random() * idioms.length)][0]).replace(/\W/g, ' ');
+    newidiom = newidiom.replace('  ', ' ');
+    return newidiom;
+};
 
-// var currentword = words[0].toLowerCase(); // get single word
-var currentword = (idioms.getnew()).toLowerCase(); // get idiom
+var currentword = words[0].toLowerCase(); // get single word
+// var currentword = (idioms.getnew()).toLowerCase(); // get idiom
 
 
 console.log(currentword);
@@ -93,8 +97,6 @@ stardisplay.update = function () {
 
 }
 
-
-
 stardisplay.animate = function () { // starred text animation
     textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
     anime.timeline({loop: false})
@@ -140,14 +142,47 @@ stardisplay.animateletter = function (array) { // letter reveal animation
     }
     }
 
+// function doreset (options) {
+//     if (options.includes('word')) { tempwords = random_words({exactly: 1, minLength: 8, maxlength: 8}); words = tempwords[0]}
+//     if (options.includes('idiom')) { words = (idioms.getnew()); }
+//     currentword = words.toLowerCase();
+//     console.log(currentword);
+//     wordstars = "";
+//     for (let i = 0; i < words[0].length; i++) { wordstars = wordstars + "*";}
+//     guesses = [];
+//     gameover = false;
+//     currentattempts = 0;
+//     multiletterattempt = 0;
+//     userattempts.update();
+//     usermulti.update();
+//     stardisplay.update();
+//     infomessage.update("Guess a letter or the entire word!");
+//     userinput.value = "";
+//     userinput.focus();
+//
+// }
 
 var userreset = document.getElementById("resetbutton");
 userreset.addEventListener('click', function() {
+    // doreset('word');
+
     words = random_words({exactly: 1, minLength: 8, maxlength: 8});
     currentword = words[0].toLowerCase();
+    // currentword = (idioms.getnew()).toLowerCase(); // get idiom
+
+
     console.log(currentword);
     wordstars = "";
-    for (let i = 0; i < words[0].length; i++) { wordstars = wordstars + "*";}
+    // for (let i = 0; i < words[0].length; i++) { wordstars = wordstars + "*";}
+    for (let i = 0; i < currentword.length; i++) { //create encrypted word
+    if ((currentword[i]) === (' ')) {
+            wordstars += " "
+            spaceindex.push(i);
+        }
+        else {
+            wordstars = wordstars + "*";
+        }
+    }
     guesses = [];
     gameover = false;
     currentattempts = 0;
