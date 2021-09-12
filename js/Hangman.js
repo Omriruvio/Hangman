@@ -4,18 +4,22 @@ $(window).on('load', function () {
 var words = random_words({exactly: 1, minLength: 6});
 var idioms = $.csv.toArrays(csvdata);
 idioms.getnew = function () {
-    let newidiom = (idioms[Math.floor(Math.random() * idioms.length)][0]).replace(/\W/g, ' ');
-    newidiom = newidiom.replace('  ', ' ');
+    let newidiom = idioms[Math.floor(Math.random() * idioms.length)][0];
+    newidiom = newidiom.replace("'", ''); // remove apostrophes
+    newidiom = newidiom.replace(/\W/g, ' '); // replace non alphanumeric char with space
+    newidiom = newidiom.replace(/\s\s+/g, ' '); // replace multiple spaces with single space
+    newidiom = newidiom.replace('excl', ''); // remove unwanted excl word from phrase
+
     return newidiom;
 };
 
 var currentword = words[0].toLowerCase(); // get single word
 // var currentword = (idioms.getnew()).toLowerCase(); // get idiom
 
-
 console.log(currentword);
 
 var game = {}
+game.selectstate = 'phrase';
 var wordstars = "";
 var maxattempts = 10;
 var currentattempts = 0;
@@ -28,6 +32,7 @@ var guesses = [];
 var textWrapper = document.querySelector('.starredtext');
 const welcomemsg = "Start here";
 var spaceindex = [];
+
 
 for (let i = 0; i < currentword.length; i++) { //create encrypted word
     if ((currentword[i]) === (' ')) {
@@ -81,20 +86,15 @@ infomessage.update.incorrectguess = function () {
 
 
 var userattempts = document.getElementById("attemptsremain");
-userattempts.update = function () {
-    userattempts.innerHTML = ((maxattempts - currentattempts) + " letter attempts remain.");
-}
+userattempts.update = function () {userattempts.innerHTML = ((maxattempts - currentattempts) + " letter attempts remain.");}
 
 var usermulti = document.getElementById("multiremain");
-usermulti.update = function () {
-    usermulti.innerHTML = ((maxmultiattempts - multiletterattempt) + " word attempts remain.");
-}
+usermulti.update = function () {usermulti.innerHTML = ((maxmultiattempts - multiletterattempt) + " word attempts remain.");}
 
 var stardisplay = document.querySelector(".starredtext");
 stardisplay.update = function () {
     stardisplay.innerHTML = (wordstars.replace(/\s/g, "<div class='wordseperator'>&nbsp</div>"));
     stardisplay.animate();
-
 }
 
 stardisplay.animate = function () { // starred text animation
@@ -114,7 +114,7 @@ stardisplay.animate = function () { // starred text animation
         easing: "easeOutExpo",
         delay: 1000
       });
-}
+} // word/phrase initial display animation function
 
 stardisplay.animateletter = function (array) { // letter reveal animation
     stardisplay.innerHTML = (wordstars.replace(/\s/g, "<div class='wordseperator'>&nbsp</div>"));
@@ -165,16 +165,18 @@ stardisplay.animateletter = function (array) { // letter reveal animation
 var userreset = document.getElementById("resetbutton");
 userreset.addEventListener('click', function() {
     // doreset('word');
+    currentword = '';
 
-    words = random_words({exactly: 1, minLength: 8, maxlength: 8});
-    currentword = words[0].toLowerCase();
-    // currentword = (idioms.getnew()).toLowerCase(); // get idiom
-
+    words = random_words({exactly: 1, minLength: 6});
+    if (game.selectstate === 'word') {
+        currentword = words[0].toLowerCase(); }
+    else if (game.selectstate === 'phrase'){
+        currentword = (idioms.getnew()).toLowerCase();}
 
     console.log(currentword);
     wordstars = "";
-    // for (let i = 0; i < words[0].length; i++) { wordstars = wordstars + "*";}
-    for (let i = 0; i < currentword.length; i++) { //create encrypted word
+    spaceindex = [];
+    for (let i = 0; i < currentword.length; i++) { //create encrypted word/phrase
     if ((currentword[i]) === (' ')) {
             wordstars += " "
             spaceindex.push(i);
@@ -182,7 +184,7 @@ userreset.addEventListener('click', function() {
         else {
             wordstars = wordstars + "*";
         }
-    }
+    } //create encrypted word/phrase
     guesses = [];
     gameover = false;
     currentattempts = 0;

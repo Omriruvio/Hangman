@@ -104,7 +104,7 @@ var csvdata = 'A Bit Much,More than is reasonable; a bit too much\n' +
     'All Hands on Deck,Everyone must help.\n' +
     'All Hat And No Cattle,"Pretentious, full of bluster"\n' +
     'All Hell Breaks Loose,The situation becomes chaotic.\n' +
-    'All In A Day\'s Work (Excl.),"That\'s what I\'m here for; although I have accomplished something, it is part of what I\'m expected to do"\n' +
+    'All In A Day\'s Work,"That\'s what I\'m here for; although I have accomplished something, it is part of what I\'m expected to do"\n' +
     'All In Good Time,Eventually; at a more favorable time in the future. This phrase encourages one to be patient.\n' +
     'All in One Piece,Safely\n' +
     'All It\'s Cracked Up To Be,As good as claims or reputation would suggest\n' +
