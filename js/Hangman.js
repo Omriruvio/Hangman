@@ -162,6 +162,18 @@ stardisplay.animateletter = function (array) { // letter reveal animation
 //
 // }
 
+var wordbutton = document.getElementById('wordbutton');
+wordbutton.addEventListener('click', function() {
+    game.selectstate = 'word';
+    userreset.click();
+});
+
+var phrasebutton = document.getElementById('phrasebutton');
+phrasebutton.addEventListener('click', function() {
+    game.selectstate = 'phrase';
+    userreset.click();
+});
+
 var userreset = document.getElementById("resetbutton");
 userreset.addEventListener('click', function() {
     // doreset('word');
