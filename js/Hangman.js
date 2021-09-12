@@ -88,7 +88,7 @@ infomessage.update = function (infostring) {
         scaleX: [0,1],
         opacity: [0.5,1],
         easing: "easeInOutExpo",
-        duration: 900,
+        duration: 900
       }).add({
         targets: '.infosection .letter',
         opacity: [0,1],
@@ -356,7 +356,7 @@ function isValid(input) {
         else {
             if ((input.toLowerCase()) === (currentword)) {
                 infomessage.update("You guessed the entire word successfully!");
-                // document.querySelector(".starredtext").innerHTML = currentword;
+                document.querySelector(".starredtext").innerHTML = currentword;
                 animatestars(true);
                 gameover = true;
                 return false;
