@@ -354,6 +354,7 @@ function isValid(input) {
         }
         else {
             if ((input.toLowerCase()) === (currentword)) {
+                infomessage.update.correctguess();
                 infomessage.update("You guessed the entire word successfully!");
                 document.querySelector(".starredtext").innerHTML = currentword;
                 animatestars(true);
