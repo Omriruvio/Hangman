@@ -147,7 +147,7 @@ body {
 	/*margin-top: 1vh;*/
 }
 
-#mainsection > h1.starredtext span {
+h1.starredtext span {
 	margin-top: auto;
 	margin-bottom: auto;
 }
@@ -232,7 +232,7 @@ body {
 	margin-left: 12%;
 }
 
-#mainsection > h1.newstarredelement span {
+h1.newstarredelement span {
 	/*color: green;*/
 	margin-top:auto;
 	margin-bottom: auto;

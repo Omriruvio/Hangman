@@ -21,8 +21,9 @@ var currentword = words[0].toLowerCase(); // get single word
 
 console.log(currentword);
 
+
 var game = {}
-game.selectstate = 'phrase';
+game.selectstate = 'word';
 var wordstars = "";
 var maxattempts = 10;
 var currentattempts = 0;
@@ -52,11 +53,9 @@ function animatestars (result) {
     $('.starredtext').hide();
     $('.newstarredelement').remove();
 
-    let starredelement = document.getElementById("mainsection");
     let newstarredelement = document.createElement("h1");
-    let mainsection = document.getElementById("mainsection");
     newstarredelement.classList.add("newstarredelement");
-    mainsection.insertBefore(newstarredelement, mainsection.firstChild);
+    $(".starredtext").before(newstarredelement);
 
     newstarredelement.innerHTML = "<h1 class='newstarredelement'>" + currentword + "</h1>";
 
@@ -71,8 +70,8 @@ function animatestars (result) {
         delay: (el, i) => 800 * i
     })
 
-    if (result === true) { $('#mainsection > h1.newstarredelement span').css('color', 'green') }
-    else { $('#mainsection > h1.newstarredelement span').css('color', 'red') }
+    if (result === true) { $('h1.newstarredelement span').css('color', 'green') }
+    else { $('h1.newstarredelement span').css('color', 'red') }
 }
 
 var infomessage = document.querySelector(".infomessage");
@@ -125,10 +124,10 @@ usermulti.update = function () {usermulti.innerHTML = ((maxmultiattempts - multi
 var stardisplay = document.querySelector(".starredtext");
 stardisplay.update = function () {
     stardisplay.innerHTML = (wordstars.replace(/\s/g, "<div class='wordseperator'>&nbsp</div>"));
-    stardisplay.animate();
+    stardisplay.Animate();
 }
 
-stardisplay.animate = function () { // starred text animation
+stardisplay.Animate = function () { // starred text animation
     textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
     anime.timeline({loop: false})
       .add({
@@ -136,7 +135,7 @@ stardisplay.animate = function () { // starred text animation
         scale: [0,1],
         opacity: [0,1],
         easing: "easeOutCirc",
-        duration: 800,
+        duration: 500,
         delay: (el, i) => 400 * i
       }).add({
         targets: '.starredtext',
