@@ -29,8 +29,15 @@ body::-webkit-scrollbar-thumb {
 }
 /*End Scroll bar shenanigans*/
 
+.page {
+	height: 100vh;
+	background: rgb(14,71,91);
+	background: radial-gradient(ellipse at bottom, rgba(14,71,91,1) 0%, rgba(10,11,18,1) 100%);
+	background-size: contain;
+}
 body {
-	background-color: #16272b;
+	/* background-color: #16272b; */
+	
 }
 
 #asciiwrap {
@@ -218,10 +225,11 @@ h1.starredtext span {
   line-height: 1em;
 }
 
-/*#MainNavbar {*/
-/*	display: flex;*/
+#MainNavbar {
+	background-color: #0d161a;
+}
 
-/*}*/
+
 
 #MainNavbar > div {
 	justify-content: center;
