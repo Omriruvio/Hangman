@@ -49,7 +49,7 @@ $(window).on('load', function () {
         }
     }
 
-    function animatestars(result) {
+    function animatestars(result) { //displays either success or failure full word/pharse reveal
 
         $('.starredtext').hide();
         $('.newstarredelement').remove();
@@ -64,10 +64,10 @@ $(window).on('load', function () {
         anime.timeline({ loop: false }).add
             ({
                 targets: '.newstarredelement .word',
-                scale: [14, 1],
+                scale: [1.5, 1],
                 opacity: [0, 1],
                 easing: "easeOutCirc",
-                duration: 1800,
+                duration: 4500,
                 delay: (el, i) => 800 * i
             })
 
